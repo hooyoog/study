@@ -110,7 +110,31 @@ git push -u origin master
 *碰见这些就往需要指针的参数小括号里填*  
 *如果需要强制类型转换，就转他（某类型```*```）后面跟着是个不得不被转换的指针*  
 
-
+## 4.把服务器改成-先接收请求再判断并回复Lesson_4_Server
+  
+```
+1. 删掉char msgBuf【】 
+2. _recvBuf[128] = {}; //创建缓冲区  
+3. 删掉send(_cSock, msgBuf, strlen(msgBuf) + 1, 0);  
+4. int nLen=recv(_cSock, _recvBuf,128,0);  
+		if (nLen <= 0) {  
+			printf("客户端退出，任务结束\n");  
+			break;  
+		}  
+		//████处理请求，并发送数据████  
+		if (0 == strcmp(_recvBuf, "getName")) {  
+			char msgBuf[] = "ShiJin";  
+			send(_cSock, msgBuf, strlen(msgBuf) + 1, 0);  
+		}  
+		else if (0 == strcmp(_recvBuf, "getAge")) {  
+			char msgBuf[] = "18";  
+			send(_cSock, msgBuf, strlen(msgBuf) + 1, 0);  
+		}  
+		else {  
+			char msgBuf[] = "???";  
+			send(_cSock, msgBuf, strlen(msgBuf) + 1, 0);  
+		}  
+```  
 
 
 
