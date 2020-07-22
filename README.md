@@ -26,7 +26,7 @@
 |避免vsStudio编译报错|```#define W32_LEAN_AND_MEAN    #define _WINSOCK_DEPRECATED_NO_WARNINGS```
 
 ## github使用方法
-1. 在github官网，创建新项目。在本地某个文件夹里右键打开github工具
+1. 在github官网，创建新项目。在本地VS创建的解决方案文件夹里右键打开github工具
 2. git config --global user.email "XXXXXXXX@qq.com" //输入一次就成
 3. git config --global user.name "honeypet"//输入一次就成
 4. git init
@@ -42,11 +42,24 @@ git push -u origin master```
 
 
 
+****
+# 第二章
+网络游戏开发
+
+## 1.Lesson_1模板
+*注意：关闭vsStudio,才能使用github*  
+
+1. 模板在本工程的xuexi_socket/Lesson_1_*中  
+2. 修改属性目录和连接器输入  
 
 
-
-
-
+## 2.简单的socket服务器Lesson_2_Server  
+1. 创建工程和连接器等
+2. 写代码  
+**原理**
+网络编程虽然很难，但是干脆把他理解成往本地存储就不难了
+|作者|小志|
+|---|---
 
 
 
