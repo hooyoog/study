@@ -26,10 +26,15 @@
 |避免vsStudio编译报错|```#define W32_LEAN_AND_MEAN    #define _WINSOCK_DEPRECATED_NO_WARNINGS```
 
 ## github使用方法
-1. 在github官网，创建新项目。在本地某个文件夹里右键打开工具
-2. git config --global user.email "XXXXXXXX@qq.com"
-3. git config --global user.name "honeypet"
-4. 
+1. 在github官网，创建新项目。在本地某个文件夹里右键打开github工具
+2. git config --global user.email "XXXXXXXX@qq.com" //输入一次就成
+3. git config --global user.name "honeypet"//输入一次就成
+4. git init
+5. 设置并提交到官网上
+```git add .  
+git commit -m "first commit"  
+git remote add origin https://github.com/hooyoog/study.git  
+git push -u origin master```  
 
 
 
