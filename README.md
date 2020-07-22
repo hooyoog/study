@@ -18,12 +18,12 @@
 ****
 
 # 第一章
-## 工具的调试
+## 工具的设置与调试
 |标题|内容|
 |---|---
 |项目->属性->常规->目录|```$(SolutionDir)/bin/$(Plantform)/$(Configuration)/```  ```$(SolutionDir)/temp/$(Plantform)/$(Configuration)/$(ProjectName)```
 |连接器->输入->增加库|```ws2_32.lib;```
-|避免vsStudio编译报错|```#define W32_LEAN_AND_MEAN    #define _WINSOCK_DEPRECATED_NO_WARNINGS```
+|避免vsStudio编译报错|```#define W32_LEAN_AND_MEAN```   ```#define _WINSOCK_DEPRECATED_NO_WARNINGS```
 
 ## github使用方法
 1. 在github官网，创建新项目。在本地VS创建的解决方案文件夹里右键打开github工具
@@ -31,14 +31,10 @@
 3. git config --global user.name "honeypet"//输入一次就成
 4. git init
 5. 设置并提交到官网上
-```git add .  
+git add .  
 git commit -m "first commit"  
 git remote add origin https://github.com/hooyoog/study.git  
-git push -u origin master```  
-
-
-
-
+git push -u origin master
 
 
 
@@ -58,9 +54,23 @@ git push -u origin master```
 2. 写代码  
 **原理**
 网络编程虽然很难，但是干脆把他理解成往本地存储就不难了
-|作者|小志|
+| 网络通讯 | 本地存储 |
 |---|---
+| 建立连接 | 相当于打开
+| 输入网络命令 | 相当于本地写写字板
+| 发送命令 | 相当于本地存储写字板内容
+| 关闭连接 | 关闭写字板
 
+**实践：搭建服务器**
+| 名称 | 内容 |
+|---|---
+| 1.导入模板 | ```WORD ver = MAKEWORD(2, 2);```  ```WSADATA dat;```  ```WSAStartup(ver, &dat);```  
+| 2.建立socket | 查看Lesson_2
+| 3.绑定端口 | 查看Lesson_2
+| 4.监听端口 | 查看Lesson_2
+| 5.接收数据 | 查看Lesson_2
+| 6.回发数据 | 查看Lesson_2
+| 7.关闭socket | 查看Lesson_2
 
 
 
