@@ -86,8 +86,8 @@ git push -u origin master
 | 名称 | 内容 | 相当于 |
 |---|---|---
 | 1.建立客户端socket | 查看Lesson_3->socket() | 打开写字板
-| 2.建立连接 | 查看Lesson_3->connect() | 解析写字板内容
-| 3.接收数据 | 查看Lesson_3->recv() | 读取写字板内容
+| 2.建立连接 | 查看Lesson_3->connect() | 打开写字板
+| 3.接收数据 | 查看Lesson_3->recv() | 解析写字板内容，读取写字板内容
 | 4.关闭 | 查看Lesson_3->closesocket() | 关闭写字板
 
 
