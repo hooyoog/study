@@ -77,4 +77,23 @@ git push -u origin master
 | 7.关闭socket | 查看Lesson_2
 
 
+## 3.简单的socket服务器Lesson_3_Client
+
+1. 创建工程和连接器\复制模板等
+
+2. 理解他
+
+| 名称 | 内容 | 相当于 |
+|---|---|---
+| 1.建立客户端socket | 查看Lesson_3->socket() | 打开写字板
+| 2.建立连接 | 查看Lesson_3->connect() | 解析写字板内容
+| 3.接收数据 | 查看Lesson_3->recv() | 读取写字板内容
+| 4.关闭 | 查看Lesson_3->closesocket() | 关闭写字板
+
+
+3. 写代码
+*代码在Lesson_3_Client，历史第一次提交*   
+
+
+
 
