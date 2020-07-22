@@ -40,7 +40,7 @@ git push -u origin master
 
 ****
 # 第二章
-网络游戏开发
+***网络游戏开发***  
 
 ## 1.Lesson_1模板
 *注意：关闭vsStudio,才能使用github*  
@@ -153,8 +153,10 @@ _cSock = accept(_sock, (sockaddr*)&clientAddr, &nAddrLen);
 6. 如果是合法内容，发送出去  
 7. 建立另一个缓冲区用于接收
 8. 接受内容并存在缓冲区，并返还一个长度，  
-9. 如果长度>0救打印出返还值  
+9. 如果长度>0就打印出返还值  
 10. #define _CRT_SECURE_NO_WARNINGS  
+
+
 
 
 
