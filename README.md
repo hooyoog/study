@@ -112,11 +112,19 @@ git push -u origin master
 
 ## 4.把服务器改成-先接收请求再判断并回复Lesson_4_Server
   
+  **做几步就编译一下，不然长时间不编译，出错不知道出在哪里**   
+  
 ```
 1. 删掉char msgBuf【】 
 2. _recvBuf[128] = {}; //创建缓冲区  
 3. 删掉send(_cSock, msgBuf, strlen(msgBuf) + 1, 0);  
-4. int nLen=recv(_cSock, _recvBuf,128,0);  
+4. 在while以上   
+_cSock = accept(_sock, (sockaddr*)&clientAddr, &nAddrLen);
+	if (_cSock == INVALID_SOCKET) {
+		printf("连接错误\n");
+	}
+	printf("客户端连接，IP：%s\n", inet_ntoa(clientAddr.sin_addr));
+5. int nLen=recv(_cSock, _recvBuf,128,0);  
 		if (nLen <= 0) {  
 			printf("客户端退出，任务结束\n");  
 			break;  
@@ -135,7 +143,18 @@ git push -u origin master
 			send(_cSock, msgBuf, strlen(msgBuf) + 1, 0);  
 		}  
 ```  
-
+  
+## 5.把客户端改成-先请求再接收回复Lesson_5_Client  
+1. 新建工程，做哪些设置的事  
+2. 删掉以前的缓冲区  
+3. 新建128的缓冲区  
+4. 在while循环里，首先要求客户输入  
+5. 判断一下输入的内容  
+6. 如果是合法内容，发送出去  
+7. 建立另一个缓冲区用于接收
+8. 接受内容并存在缓冲区，并返还一个长度，  
+9. 如果长度>0救打印出返还值  
+10. #define _CRT_SECURE_NO_WARNINGS  
 
 
 
