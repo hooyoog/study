@@ -69,11 +69,11 @@ git push -u origin master
 | 名称 | 内容 |
 |---|---
 | 1.导入模板 | ```WORD ver = MAKEWORD(2, 2);```  ```WSADATA dat;```  ```WSAStartup(ver, &dat);```  
-| 2.建立socket | 查看Lesson_2
-| 3.绑定端口 | 查看Lesson_2
-| 4.监听端口 | 查看Lesson_2
-| 5.接收数据 | 查看Lesson_2
-| 6.回发数据 | 查看Lesson_2
+| 2.建立socket | 查看Lesson_2->socket()
+| 3.绑定端口 | 查看Lesson_2->bind()
+| 4.监听端口 | 查看Lesson_2->listen()
+| 5.接收数据 | 查看Lesson_2->accept()
+| 6.回发数据 | 查看Lesson_2->send()
 | 7.关闭socket | 查看Lesson_2
 
 
