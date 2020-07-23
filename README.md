@@ -114,7 +114,7 @@ git push -u origin master
   
   **做几步就编译一下，不然长时间不编译，出错不知道出在哪里**   
   
-```
+```c
 1. 删掉char msgBuf【】 
 2. _recvBuf[128] = {}; //创建缓冲区  
 3. 删掉send(_cSock, msgBuf, strlen(msgBuf) + 1, 0);  
