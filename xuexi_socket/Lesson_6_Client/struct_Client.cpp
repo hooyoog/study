@@ -2,13 +2,19 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
 
+
 #include<WinSock2.h>
 #include<Windows.h>
 #include<stdio.h>
 
 #include<iostream>
 
-
+//定义数据结构
+struct Datapackage
+{
+	int age;
+	char name[32];
+};
 
 
 int main() {
@@ -64,7 +70,14 @@ int main() {
 		char recvBuf[128] = {};
 		int nlen = recv(_sock, recvBuf, 128, 0);
 		if (nlen > 0) {
-			printf("OK:%s\n", recvBuf);
+			
+
+
+			//下一行，将字符数组强制转换为 结构体指针
+			Datapackage* dp = (Datapackage*)recvBuf;
+			printf("接收到数据:年龄-%d , 姓名-%s\n", dp->age, dp->name);
+
+
 		}
 		else {
 			printf("ERROR");

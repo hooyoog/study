@@ -9,6 +9,15 @@
 #include<iostream>
 
 
+//定义数据结构
+struct Datapackage
+{
+	int age;
+	char name[32];
+};
+
+
+
 int main() {
 
 	WORD ver = MAKEWORD(2, 2);
@@ -62,14 +71,14 @@ int main() {
 		}
 		//████处理请求，并发送数据████
 		printf("收到客户申请:%s\n", _recvBuf);
-		if (0 == strcmp(_recvBuf, "getName")) {
-			char msgBuf[] = "ShiJin";
-			send(_cSock, msgBuf, strlen(msgBuf) + 1, 0);
+
+
+		if (0 == strcmp(_recvBuf, "getInfo")) {
+				Datapackage db = { 90,"shijin" };
+				send(_cSock, (const char*)&db, sizeof(Datapackage), 0);
+
 		}
-		else if (0 == strcmp(_recvBuf, "getAge")) {
-			char msgBuf[] = "18";
-			send(_cSock, msgBuf, strlen(msgBuf) + 1, 0);
-		}
+
 		else {
 			char msgBuf[] = "???";
 			send(_cSock, msgBuf, strlen(msgBuf) + 1, 0);
