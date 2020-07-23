@@ -155,6 +155,14 @@ _cSock = accept(_sock, (sockaddr*)&clientAddr, &nAddrLen);
 8. 接受内容并存在缓冲区，并返还一个长度，  
 9. 如果长度>0就打印出返还值  
 10. #define _CRT_SECURE_NO_WARNINGS  
+11. 把服务器与客户端增强一些，加一些_cSock打印，与申请内容打印  
+
+
+## 4.由最简易的字符串服务器迭代成 -> struct结构体版本  
+1. 复习一下结构体struct  
+| 名称 | 内容 |
+|---|---
+| 1.struct是数据表 | 也只是个表格
 
 
 

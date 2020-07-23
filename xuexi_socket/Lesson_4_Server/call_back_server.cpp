@@ -47,7 +47,8 @@ int main() {
 	if (_cSock == INVALID_SOCKET) {
 		printf("连接错误\n");
 	}
-	printf("客户端连接，IP：%s\n", inet_ntoa(clientAddr.sin_addr));
+	
+	printf("客户端连接，SOCKET：%d - IP：%s\n", (int)_cSock, inet_ntoa(clientAddr.sin_addr));
 
 	//创建接收缓冲区
 	char _recvBuf[128] = {};
@@ -60,6 +61,7 @@ int main() {
 			break;
 		}
 		//████处理请求，并发送数据████
+		printf("收到客户申请:%s\n", _recvBuf);
 		if (0 == strcmp(_recvBuf, "getName")) {
 			char msgBuf[] = "ShiJin";
 			send(_cSock, msgBuf, strlen(msgBuf) + 1, 0);
