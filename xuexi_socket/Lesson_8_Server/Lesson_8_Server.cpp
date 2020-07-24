@@ -82,7 +82,7 @@ int main() {
 	sockaddr_in _sin = {};
 	_sin.sin_family = AF_INET;
 	_sin.sin_port = htons(4567);
-	_sin.sin_addr.S_un.S_addr = INADDR_ANY;
+	_sin.sin_addr.S_un.S_addr = inet_addr("127.0.0.1");
 
 
 	//█绑定端口█
@@ -139,7 +139,7 @@ int main() {
 
 			
 			
-			recv(_cSock, szRecv +sizeof(DataHeader), sizeof(Login)- sizeof(DataHeader), 0);
+			recv(_cSock, szRecv +sizeof(DataHeader), header->dataLength - sizeof(DataHeader), 0);
 			
 
 			Login* login = (Login*)szRecv;//收到数据后，改为用指针
@@ -162,7 +162,7 @@ int main() {
 				
 		case CMD_LOGOUT: {
 			Logout* logout = (Logout*)szRecv;
-			recv(_cSock, szRecv + sizeof(DataHeader), sizeof(Logout) - sizeof(DataHeader), 0);
+			recv(_cSock, szRecv + sizeof(DataHeader), header->dataLength - sizeof(DataHeader), 0);
 			
 			printf("收到命令: CMD_LOGIN，数据长度:%d,username=%s\n", 
 				logout->dataLength, logout->userName);
@@ -174,8 +174,9 @@ int main() {
 
 					   
 		default:
-			header->cmd = CMD_ERROR;
-			header->dataLength = 0;
+			DataHeader header;
+			header.cmd = CMD_ERROR;
+			header.dataLength = 0;
 			send(_cSock, (char*)&header, sizeof(header), 0);
 
 			break;
