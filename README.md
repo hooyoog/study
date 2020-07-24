@@ -188,7 +188,9 @@ _cSock = accept(_sock, (sockaddr*)&clientAddr, &nAddrLen);
 
 
 ##8. 改造成合体struct  
-**1. 整理**
+**1. 整理**   
+**2. 增加两种枚举类型，分别是登陆结果和退出结果**  
+**3. 所有的其他结构体都 继承 header，并用其构造函数，初始化header,并初始化结果**
 
 
 

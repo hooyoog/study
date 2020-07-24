@@ -1,4 +1,7 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(452,5): warning MSB8004: Intermediate 目录未以斜杠结尾。  此生成实例将添加斜杠，因为必须有这个斜杠才能正确计算 Intermediate 目录。
   Lesson_8_Server.cpp
-C:\Users\i9-002\source\repos\LearnSocket\study\xuexi_socket\Lesson_8_Server\Lesson_8_Server.cpp(112,11): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“char (*)[32]”
+C:\Users\i9-002\source\repos\LearnSocket\study\xuexi_socket\Lesson_8_Server\Lesson_8_Server.cpp(132,11): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“char (*)[32]”
+C:\Users\i9-002\source\repos\LearnSocket\study\xuexi_socket\Lesson_8_Server\Lesson_8_Server.cpp(149,11): warning C4473: “printf”: 没有为格式字符串传递足够的参数
+C:\Users\i9-002\source\repos\LearnSocket\study\xuexi_socket\Lesson_8_Server\Lesson_8_Server.cpp(149,11): message : 占位符和其参数预计 3 可变参数，但提供的却是 2 参数
+C:\Users\i9-002\source\repos\LearnSocket\study\xuexi_socket\Lesson_8_Server\Lesson_8_Server.cpp(149,11): message : 缺失的可变参数 3 为格式字符串“%s”所需
   Lesson_8_Server.vcxproj -> C:\Users\i9-002\source\repos\LearnSocket\study\xuexi_socket\/bin//Debug/Lesson_8_Server.exe
