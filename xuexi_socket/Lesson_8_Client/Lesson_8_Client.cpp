@@ -11,37 +11,57 @@
 enum CMD
 {
 	CMD_LOGIN,
+	CMD_LOGIN_RESULT,
 	CMD_LOGOUT,
+	CMD_LOGOUT_RESULT,
 	CMD_ERROR
 };
 
 
-
 struct DataHeader
 {
-	short dataLength;//数据长度
-	short cmd;//命令
+	short dataLength;
+	short cmd;
 };
 
-struct Login
+struct Login :public DataHeader
 {
+	Login() {
+		dataLength = sizeof(Login);
+		cmd = CMD_LOGIN;
+	}
 	char userName[32];
 	char passWord[32];
 };
 
-struct LoginResult
+
+struct LoginResult :public DataHeader
 {
+	LoginResult() {
+		dataLength = sizeof(LoginResult);
+		cmd = CMD_LOGIN_RESULT;
+		result = 0;
+	}
 	int result;
 
 };
 
-struct Logout
+struct Logout :public DataHeader
 {
+	Logout() {
+		dataLength = sizeof(Logout);
+		cmd = CMD_LOGOUT;
+	}
 	char userName[32];
 
 };
-struct LogoutResult
+struct LogoutResult :public DataHeader
 {
+	LogoutResult() {
+		dataLength = sizeof(LogoutResult);
+		cmd = CMD_LOGOUT_RESULT;
+		result = 0;
+	}
 	int result;
 
 };
@@ -71,64 +91,47 @@ int main() {
 		printf("CONNECT SUCCUSSE!!!\n");
 	}
 
-	//█输入请求█
+
 	char cmdBuf[128] = {};
 
 
-	while (1) {//连接成功后加入循环
+	while (1) {
 		//输入
 		scanf("%s", cmdBuf);
 
-		//█判断请求█
-		//判断自己写的是啥，是否是退出
 		if (0 == strcmp(cmdBuf, "exit")) {
 			printf("退出\n");
 			break;
 		}
 		else if (0 == strcmp(cmdBuf, "login")) {
-			//█发送请求█
+	
 
-			//定义数据头-包头
-			DataHeader dh = { sizeof(Login),CMD_LOGIN };
-			//发送->包头 //因为程序知道，服务器肯定先接收包头
-			send(_sock, (const char*)&dh, sizeof(dh), 0);
 
-			//发送->包体
-			Login login = { "username","abcd1234" };//定义数据
-			
+			//发送->包
+			Login login;
+			strcpy(login.userName, "shijin");
+			strcpy(login.passWord, "aaaaaaaaaa");
 			send(_sock, (const char*)&login, sizeof(login), 0);
-
-			//█接收服务器返回数据█
-			//先接受 包头
-			DataHeader retHeader = {};
-			recv(_sock, (char*)&retHeader, sizeof(retHeader), 0);
+			
+			
 
 			//后接受包体
 			LoginResult loginRet = {};
 			recv(_sock, (char*)&loginRet, sizeof(LoginResult), 0);
-
 			printf("LoginResult: %d\n", loginRet.result);
 
 		}
 		else if (0 == strcmp(cmdBuf, "logout")) {
-			//█发送请求█
-			Logout logout = { "username" };
-			DataHeader dh = { sizeof(logout),CMD_LOGOUT };
-			//发送->包头
-			send(_sock, (const char*)&dh, sizeof(dh), 0);
-
-			//发送->包体
+		//发送->包体
+			Logout logout;
+			strcpy(logout.userName, "shijin");
 			send(_sock, (const char*)&logout, sizeof(logout), 0);
 
-			//█接收服务器返回数据█
-			//先接受 包头
-			DataHeader retHeader = {};
-			recv(_sock, (char*)&retHeader, sizeof(retHeader), 0);
+			
 
-			//后接受 包体
+			//后接受 包
 			LoginResult logoutRet = {};
 			recv(_sock, (char*)&logoutRet, sizeof(logoutRet), 0);
-
 			printf("LoginResult: %d\n", logoutRet.result);
 
 
