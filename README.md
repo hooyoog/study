@@ -21,7 +21,7 @@
 ## 工具的设置与调试
 |标题|内容|
 |---|---
-|项目->属性->常规->目录|```$(SolutionDir)/bin/$(Plantform)/$(Configuration)/```  ```$(SolutionDir)/temp/$(Plantform)/$(Configuration)/$(ProjectName)```
+|项目->属性->常规->目录|```$(SolutionDir)/bin/$(Platform)/$(Configuration)/```  ```$(SolutionDir)/temp/$(Platform)/$(Configuration)/$(ProjectName)```
 |连接器->输入->增加库|```ws2_32.lib;```
 |避免vsStudio编译报错|```#define W32_LEAN_AND_MEAN```   ```#define _WINSOCK_DEPRECATED_NO_WARNINGS```
 
