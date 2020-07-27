@@ -204,4 +204,75 @@ _cSock = accept(_sock, (sockaddr*)&clientAddr, &nAddrLen);
 **1. 把数据读到缓冲区，可以利用指针只读头部那么多，这些操作全都是因为客户端与服务器数据长度相等**   
 **2. 根据头，再往缓冲区里流入本条数据，用指针指着他们的名字做业务**  
 
+****  
+#第三章
+
+##跨平台C++   
+
+|平台|特点|
+|---|---
+|windows|有很多windows宏，是它自己定义的，别的平台没有，需要照着他的宏自己定义    
+|linux|标准的C++,只是没有好的IDE   
+|macOS|标准的C++,xcode比较熬好用，检查、提醒的比较细，只是没有大括号成对常亮    
+
+mac移植   
+
+1. 头文件   
+
+```c
+#ifdef _WIN32
+
+    #define W32_LEAN_AND_MEAN
+    #define _WINSOCK_DEPRECATED_NO_WARNINGS//仅windows起效
+    #define _CRT_SECURE_NO_WARNINGS
+    #include<WinSock2.h>
+    #include<Windows.h>
+#else
+    #include<unistd.h> //nui std
+    #include<arpa/inet.h>
+    #include<string.h>
+    #define SOCKET int
+    #define INVALID_SOCKET  (SOCKET)(~0)
+    #define SOCKET_ERROR            (-1)
+
+#endif
+```   
+
+2. windows 模板   
+```c
+int main() {
+
+#ifdef _WIN32
+    WORD ver = MAKEWORD(2, 2);
+    WSADATA dat;
+    WSAStartup(ver, &dat);
+#endif
+```   
+
+3. 兼容性绑定平台   
+
+```c
+#ifdef _WIN32
+    _sin.sin_addr.S_un.S_addr = inet_addr("192.168.79.1");
+#else
+    _sin.sin_addr.s_addr = inet_addr("192.168.79.1");
+#endif
+```
+
+4. 关闭  
+
+```c
+#ifdef _WIN32
+    closesocket(_sock);
+    
+    WSACleanup();
+    
+#else
+    close(_sock);
+    
+#endif
+
+```   
+
+
 
