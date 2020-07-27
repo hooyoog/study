@@ -92,7 +92,7 @@ int main() {
     _sin.sin_family = AF_INET;
     _sin.sin_port = htons(4567);
 #ifdef _WIN32
-    _sin.sin_addr.S_un.S_addr = inet_addr("192.168.79.1");
+    _sin.sin_addr.S_un.S_addr = inet_addr("192.168.79.130");
 #else
     _sin.sin_addr.s_addr = inet_addr("192.168.79.1");
 #endif

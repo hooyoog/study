@@ -31,6 +31,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lesson_8_lianxi_client", "L
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lesson_9_Mac_Client", "Lesson_9_Mac_Client\Lesson_9_Mac_Client.vcxproj", "{DFF5F52D-7C4C-4983-964B-F120337E9441}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lesson_9_linux_Server", "Lesson_9_linux_Server\Lesson_9_linux_Server.vcxproj", "{79548E4E-7739-4189-A0DF-E3E1F930EF53}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -151,6 +153,14 @@ Global
 		{DFF5F52D-7C4C-4983-964B-F120337E9441}.Release|x64.Build.0 = Release|x64
 		{DFF5F52D-7C4C-4983-964B-F120337E9441}.Release|x86.ActiveCfg = Release|Win32
 		{DFF5F52D-7C4C-4983-964B-F120337E9441}.Release|x86.Build.0 = Release|Win32
+		{79548E4E-7739-4189-A0DF-E3E1F930EF53}.Debug|x64.ActiveCfg = Debug|x64
+		{79548E4E-7739-4189-A0DF-E3E1F930EF53}.Debug|x64.Build.0 = Debug|x64
+		{79548E4E-7739-4189-A0DF-E3E1F930EF53}.Debug|x86.ActiveCfg = Debug|Win32
+		{79548E4E-7739-4189-A0DF-E3E1F930EF53}.Debug|x86.Build.0 = Debug|Win32
+		{79548E4E-7739-4189-A0DF-E3E1F930EF53}.Release|x64.ActiveCfg = Release|x64
+		{79548E4E-7739-4189-A0DF-E3E1F930EF53}.Release|x64.Build.0 = Release|x64
+		{79548E4E-7739-4189-A0DF-E3E1F930EF53}.Release|x86.ActiveCfg = Release|Win32
+		{79548E4E-7739-4189-A0DF-E3E1F930EF53}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
