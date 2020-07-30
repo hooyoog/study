@@ -74,31 +74,74 @@ windows VC中包含的头文件名，不区分大小写如 #include "head.h" = #
 
 2.在工具/选项/项目及解决方案/vc++目录/包含文件中，加入sdk安装目录下的include，在工具/选项/项目及解决方案/vc++目录/库文件中，加入sdk安装目录下的lib。
 
-3.在使用时，在cpp中加入：
+3.在使用时，在cpp中加入：   
 
-#include<d3d8.h> 
-#include<d3dx8.h>
-#include<ddraw.h>
-#pragma comment(lib,"d3d8.lib")   
+#include<d3d8.h>   
+#include<d3dx8.h>  
+#include<ddraw.h>   
+#pragma comment(lib,"d3d8.lib")     
 #pragma comment(lib,"d3dx8.lib")    
 #pragma comment(lib,"ddraw.lib")    
 #pragma comment(lib,"dxguid.lib")  
 
 
+
+
+
+
 4.如果编译时报：
 
-duringImage错误，那么在项目/项目属性/配置属性/链接器/常规/启用增量链接,将"是"改为"否"。* 
-
-## 1.  
-* *   
-
-1.   
-2.   
+duringImage错误，那么在项目/项目属性/配置属性/链接器/常规/启用增量链接,将"是"改为"否"。
 
 
-## 2.简单  
-1.  
-2.   
+5.另外：c:\program files\microsoft sdks\windows\v6.0a\include\winnt.h
+编译器通知我们POINTER_64没有定义。   
+#define POINTER_64 __ptr64
+typedef void *PVOID;
+typedef void * POINTER_64 PVOID64;
+
+6.语法错误 : 标识符“SHANDLE_PTR”    
+c:\program files\microsoft sdks\windows\v6.0a\include\exdisp.h   
+include path.即改变包含路径的顺序，保证DirectX包含路径在PlatformSDK包含路径之后   
+
+
+* 
+
+## 1.  Visual studio使用
+*Visoul C++基础*   
+
+1. 安装，最好用ISO光盘镜像完全安装,包括重要工具，MSDN（Micrsoft Developer Nwtwork）帮助文件  
+2. 目标：学会看帮助文档，由被动学习转为主动学习   
+3. 包括好工具：Psy++ 、ActiveX Test Container 、Install Shiels安装界面生成器、
+如果开发时出现（Linking）卡死，安装MSDN补丁   
+4. 左侧分页栏，前三个vc自带，视图、资源、源文件；后面的是VC助手添加的，方便查看文件和符号
+5. AppWizard应用程序向导,用于生成各种应用程序的骨干框架。   
+6. ClassWizard（类向导）   
+7. Resource Editor 编辑资源、如菜单工具栏、位图等   
+
+8. 平缓的学习曲线,对抗无厘头的WIDOWS  
+|标题|内容|
+|---|---
+|基础|基本的C语言编程（过程式模式）
+|WinAPI|WinAPI编程模式(事件驱动)，掌握一些API
+|MFC|MFC运行机制，理解对应API是如何封装的  
+|MFC类库|尽可能多的掌握MFC类库   
+|高手阶段|组件编程 
+
+## 2.Windows事件驱动编程模式      
+1.  软件不按照变成顺序执行，而是等待监听用户的输入激励程序的执行，这种不按顺序发生的激励叫做“消息”
+2.   “消息”是API和MFC中非常重要的概念。 类似于CPU的中断，中断后“轮询”。
+3.  “消息”是c结构体，包含1名称、2一些相关参数、3处理这个消息的指针；  
+消息分类    
+|名称|内容|
+|---|---
+|输入消息|鼠标键盘等
+|控件消息|按钮、文本框等通信，此类消息一般不经过消息队列，直接发到控件对象上。
+|系统消息|如何创建窗体等
+|用户自定义消息|重要、比如qq,规划自定义消息，登录，好友在线等。通讯程序中最重要的消息。    
+
+
+## 3.Windows的API编程
 
 **原理**  
 * *  
