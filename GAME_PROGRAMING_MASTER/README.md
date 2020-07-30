@@ -400,11 +400,37 @@ LRESULT CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 
 ```
 
+
+##有点多，别怕。 上面有3个全局变量和5个全局函数    
+**三个全集变量**
 |名称|内容|   
 |---|---   
-|#include<windows.h>|相当于<stdio.h>  
+|HINSTANCE hInst;|本应用程序的句柄，如果不了解“句柄”，就想象一下手柄，也可以理解为指针，这个变量就是标示此Win32程序的运行实例   
+| ``` TCHAR szTitle[MAX_LOADSTRING];```|标题栏上的标题 字符串  
+|```TCHAR szWindowClass[MAX_LOADSTRING];```|窗体类的类名   
 
-**原理**  
+**5个函数，地位不同，WinMain是主函数，WndProc是消息处理函数**
+
+|名称|内容|
+|---|---
+|WinMain()|主函数
+|WndProc()|消息处理函数
+|MyRegisterClass()|注册窗口类（其实直接把里面的内容写到main里面也成，但是这样封装成方法看上去执行流程更清晰）   
+|InitInstance()|产生并显示主窗体（main里使用）    
+|About()|他是在WndProc()消息处理函数中用到的,专门处理发给About对话框的消息   
+
+**画一张图**
+|流程图|  
+|---|  
+|程序入口|  
+|▼|  
+|主函数WinMain|  
+|▼|  
+|注册窗口类MyRegisterClass|  
+|▼|  
+|生成并显示窗体InitInstace|  
+|▼|  
+|（进入消息循环）|  
 * *  
 
 |网络通讯|本地存储|
