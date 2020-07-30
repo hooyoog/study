@@ -146,6 +146,35 @@ include path.即改变包含路径的顺序，保证DirectX包含路径在Platfo
  
 
 ## 3.Windows的API编程   
+新建一个空程序，输入   
+```c
+#include<windows.h>
+int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,int NShowCmd)
+{
+	MessageBox(NULL,TEXT("Hello , World"),TEXT("hello"),0);
+	return 0;
+}
+
+```   
+ 
+消息分类    
+
+|名称|内容|   
+|---|---   
+|#include<windows.h>|相当于<stdio.h>   
+|WinMain|相当于main()。   
+|WINAPI 提示编译识别子|规定在编译时，如何生成二进制代码、函数参数的入栈顺序、参数放置位置,是这样定义的  ```#define WINAPI _stdcall``` 
+|_stdcall|Windows程序通用函数调用方式。 
+|WinMain的前两个参数HINSTANCE|句柄类型，和指针类似，win程序或资源的一个编号，以便查找，第一个是当前程序实例的编号，第二个没用，以前的遗留    
+|LPSTR|字符串指针，指向启动时一些命令的参数   
+|NShowCmd|程序最初的显示方式，例如最大化   
+|MessageBox|显示短信息   
+|第一个参数NULL|母体窗体代号，没有写NULL   
+|第二个参数TEXT("Hello , World")|窗体显示内容   
+|第三个参数TEXT("hello")|窗口标题   
+|第四个参数0|窗口风格，例如只有MB_OK确认或者有确认和取消MB_OKCANCEL    
+
+
 
 **原理**  
 * *  
