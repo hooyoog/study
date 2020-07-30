@@ -145,7 +145,7 @@ include path.即改变包含路径的顺序，保证DirectX包含路径在Platfo
 |用户自定义消息|重要、比如qq,规划自定义消息，登录，好友在线等。通讯程序中最重要的消息。      
  
 
-## 3.Windows的API编程   
+## 3.Windows的API编程入门   
 新建一个空程序，输入   
 ```c
 #include<windows.h>
@@ -174,6 +174,10 @@ int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,i
 |第三个参数TEXT("hello")|窗口标题   
 |第四个参数0|窗口风格，例如只有MB_OK确认或者有确认和取消MB_OKCANCEL    
 
+
+
+## 4.Windows的API编程提高   
+vs新建一个helloworld app
 
 
 **原理**  
