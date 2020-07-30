@@ -205,8 +205,8 @@ lesson_1.cpp
 
 // Global Variables:全局变量
 HINSTANCE hInst;								// current instance应用程序局柄
-TCHAR szTitle[MAX_LOADSTRING];								// The title bar text
-TCHAR szWindowClass[MAX_LOADSTRING];								// The title bar text
+TCHAR szTitle[MAX_LOADSTRING];					// The title bar text
+TCHAR szWindowClass[MAX_LOADSTRING];			// The title bar text
 
 // Foward declarations of functions included in this code module:函数定义
 ATOM				MyRegisterClass(HINSTANCE hInstance);//这是VC帮你写的一个注册窗口bai类的函数，其实就是du
@@ -219,36 +219,39 @@ LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
 LRESULT CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
 
 
-//主函数
+//步骤一   主函数
 int APIENTRY WinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
                      LPSTR     lpCmdLine,
                      int       nCmdShow)
 {
  	// TODO: Place code here.
-	MSG msg;
+	MSG msg;//1消息在windows中是一种数据结构
 	HACCEL hAccelTable;
 
 	// Initialize global strings
 	LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 	LoadString(hInstance, IDC_LESSON_1, szWindowClass, MAX_LOADSTRING);
-	MyRegisterClass(hInstance);//注册窗体，具体实现再下面
+	MyRegisterClass(hInstance);//2注册窗体类，具体实现再下面
 
 	// Perform application initialization: 初始化程序，具体实现在下面
-	if (!InitInstance (hInstance, nCmdShow)) 
+	if (!InitInstance (hInstance, nCmdShow)) //3产生主窗体,失败退出
 	{
 		return FALSE;
 	}
 
 	hAccelTable = LoadAccelerators(hInstance, (LPCTSTR)IDC_LESSON_1);
 
+
+	//4以上完成建立主窗体工作
+	//5以下建立消息循环工作
 	// Main message loop:主要消息循环
-	while (GetMessage(&msg, NULL, 0, 0)) //获取消息
+	while (GetMessage(&msg, NULL, 0, 0)) //6获取消息队列中的消息
 	{
 		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) 
 		{
-			TranslateMessage(&msg);//翻译消息
-			DispatchMessage(&msg);//分发消息给相应的处理函数
+			TranslateMessage(&msg);//7翻译消息
+			DispatchMessage(&msg);//8分发消息给相应的处理函数
 		}
 	}
 
@@ -269,7 +272,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 //    function that was added to Windows 95. It is important to call this function
 //    so that the application will get 'well formed' small icons associated
 //    with it.
-//		注册窗体类
+//		步骤二     注册窗体类  其实是个结构体
 //
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
@@ -301,14 +304,23 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 //        In this function, we save the instance handle in a global variable and
 //        create and display the main program window.
+//		注册之后就该生产窗体了
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)//初始化
 {
    HWND hWnd;
 
-   hInst = hInstance; // Store instance handle in our global variable
+   hInst = hInstance; // Store instance handle in our global variable应用程序的句柄，指向哪个动作填进小括号里
 
-   //产生窗体
+   //CreateWindow产生具体的窗体对象，
+   //参数：类名称，
+   //标题，
+   //风格（WS_OVERLAPPED），
+   //x，y,宽度，高度，
+   //父窗口句柄(因为需要在父窗体里生成窗体)，
+   //菜单句柄（由于窗体类已经设定好了，所以设空），
+   //窗体所属应用程序句柄（指向生成的窗体所属程序运行实例），
+   //指向CREATESTRUCT结构的指针（可以记载创建窗体的参数）
    hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
 
@@ -317,11 +329,21 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)//初始化
       return FALSE;
    }
 
-   ShowWindow(hWnd, nCmdShow);//这两句 显示窗体
-   UpdateWindow(hWnd);
-
+	//从这里这两句 显示窗体
+	//参数1窗体句柄，参数2显示方式(有SW_SHOW显示窗体、SW_MAXIMIZE最大化窗体等)
+   ShowWindow(hWnd, nCmdShow);
+   UpdateWindow(hWnd);//这个函数调用WM_PAINT消息，让主窗体重绘，显示出文字
+	//于是就显示出来了返还true
    return TRUE;
 }
+
+
+
+//说明：
+
+
+
+
 
 //
 //  FUNCTION: WndProc(HWND, unsigned, WORD, LONG)
