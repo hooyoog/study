@@ -419,7 +419,9 @@ LRESULT CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 |InitInstance()|产生并显示主窗体（main里使用）    
 |About()|他是在WndProc()消息处理函数中用到的,专门处理发给About对话框的消息   
 
-**画一张图**
+**画一张图**    
+https://github.com/hooyoog/study/blob/master/GAME_PROGRAMING_MASTER/images/WinMain.JPG
+
 |流程图|  
 |---|  
 |程序入口|  
@@ -432,6 +434,7 @@ LRESULT CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 |▼|  
 |（进入消息循环）|  
 * *  
+
 
 |名称(竖着读)|过程|过程|过程|动作|过程|
 |---|---|---|---|---|---
