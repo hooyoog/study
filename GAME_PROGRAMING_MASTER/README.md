@@ -245,6 +245,9 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 
 	//4以上完成建立主窗体工作
 	//5以下建立消息循环工作
+	//Windows是基于消息操作的系统，包括鼠标键盘消息，存放在消息队列中，系统有消息，
+	//应用程序也有消息，GetMessage函数就是从这  两  个队列中获取消息，
+	//经过Translate函数解释消息后，由DispatchMessage发送窗体消息处理与函数
 	// Main message loop:主要消息循环
 	while (GetMessage(&msg, NULL, 0, 0)) //6获取消息队列中的消息
 	{
@@ -339,7 +342,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)//初始化
 
 
 
-//说明：
+//说明：UpdateWindow每次调用都是重绘
+
+//接下来是针对消息的循环，在WinMain最后的代码是while,翻回去看
 
 
 
@@ -465,9 +470,17 @@ https://github.com/hooyoog/study/blob/master/GAME_PROGRAMING_MASTER/images/WinMa
 |循| |  | 无 → |Windows默认处理|
 |环| |  |   ||
 
+****     
+**获得消息的两大函数**   
+|GetMessage()|PeekMessage()|   
+|---|---
+|阻塞（收到消息才返还）|非阻塞（没收到返回false）
+|重要功能是阻塞的取出|主要功能是窥探，或者取出，需要第三个参数（PM_REMOVE）  
+| |如果第三个参数（PM_NOREMOVE）,只偷看 
+|适合阻塞的业务 |非阻塞适合OpenGL在限制时间不断刷屏 
+****
 
-
-**实践：搭建服务器**
+**实践**
 | 名称 | 内容 |
 |---|---
 | 1.  | ```  ;```  
