@@ -177,8 +177,232 @@ int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,i
 
 
 ## 4.Windows的API编程提高   
-vs新建一个helloworld app
+vs新建一个helloworld app   
+stdafx.h文件   
+|名称|内容|   
+|---|---   
+|#include<windows.h>|相当于<stdio.h>   
+|#include<stdlib.h>|相当于   
+|#include<malloc.h>|相当于
+|#include<memory.h>|相当于
+|#include<tchar.h>|相当于    
 
+
+.rc文件,是资源脚本文件，一般不编辑它   
+
+resource.h各种资源符号的定义，都是一些系统分配的整数，多用于MFC  
+   
+   
+lesson_1.cpp   
+```c
+// lesson_1.cpp : Defines the entry point for the application.
+//
+
+#include "stdafx.h"//头文件
+#include "resource.h"//系统资源文件
+
+#define MAX_LOADSTRING 100
+
+// Global Variables:全局变量
+HINSTANCE hInst;								// current instance应用程序局柄
+TCHAR szTitle[MAX_LOADSTRING];								// The title bar text
+TCHAR szWindowClass[MAX_LOADSTRING];								// The title bar text
+
+// Foward declarations of functions included in this code module:函数定义
+ATOM				MyRegisterClass(HINSTANCE hInstance);//这是VC帮你写的一个注册窗口bai类的函数，其实就是du
+//先定义了一个zhiWNDCLASSEX 结构，然后指定一些窗口特性，
+//调用dao RegisterClassEx返回。
+
+
+BOOL				InitInstance(HINSTANCE, int);
+LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
+
+
+//主函数
+int APIENTRY WinMain(HINSTANCE hInstance,
+                     HINSTANCE hPrevInstance,
+                     LPSTR     lpCmdLine,
+                     int       nCmdShow)
+{
+ 	// TODO: Place code here.
+	MSG msg;
+	HACCEL hAccelTable;
+
+	// Initialize global strings
+	LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
+	LoadString(hInstance, IDC_LESSON_1, szWindowClass, MAX_LOADSTRING);
+	MyRegisterClass(hInstance);//注册窗体，具体实现再下面
+
+	// Perform application initialization: 初始化程序，具体实现在下面
+	if (!InitInstance (hInstance, nCmdShow)) 
+	{
+		return FALSE;
+	}
+
+	hAccelTable = LoadAccelerators(hInstance, (LPCTSTR)IDC_LESSON_1);
+
+	// Main message loop:主要消息循环
+	while (GetMessage(&msg, NULL, 0, 0)) //获取消息
+	{
+		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) 
+		{
+			TranslateMessage(&msg);//翻译消息
+			DispatchMessage(&msg);//分发消息给相应的处理函数
+		}
+	}
+
+	return msg.wParam;
+}
+
+
+
+//
+//  FUNCTION: MyRegisterClass()
+//
+//  PURPOSE: Registers the window class.
+//
+//  COMMENTS:
+//
+//    This function and its usage is only necessary if you want this code
+//    to be compatible with Win32 systems prior to the 'RegisterClassEx'
+//    function that was added to Windows 95. It is important to call this function
+//    so that the application will get 'well formed' small icons associated
+//    with it.
+//		注册窗体类
+//
+ATOM MyRegisterClass(HINSTANCE hInstance)
+{
+	WNDCLASSEX wcex;//声明结构，下面的代码就是填充其内容
+
+	wcex.cbSize = sizeof(WNDCLASSEX); 
+
+	wcex.style			= CS_HREDRAW | CS_VREDRAW;
+	wcex.lpfnWndProc	= (WNDPROC)WndProc;//指定窗体消息函数
+	wcex.cbClsExtra		= 0;
+	wcex.cbWndExtra		= 0;
+	wcex.hInstance		= hInstance;
+	wcex.hIcon			= LoadIcon(hInstance, (LPCTSTR)IDI_LESSON_1);
+	wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
+	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
+	wcex.lpszMenuName	= (LPCSTR)IDC_LESSON_1;
+	wcex.lpszClassName	= szWindowClass;
+	wcex.hIconSm		= LoadIcon(wcex.hInstance, (LPCTSTR)IDI_SMALL);
+
+	return RegisterClassEx(&wcex);//注册窗体
+}
+
+//
+//   FUNCTION: InitInstance(HANDLE, int)
+//
+//   PURPOSE: Saves instance handle and creates main window
+//
+//   COMMENTS:
+//
+//        In this function, we save the instance handle in a global variable and
+//        create and display the main program window.
+//
+BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)//初始化
+{
+   HWND hWnd;
+
+   hInst = hInstance; // Store instance handle in our global variable
+
+   //产生窗体
+   hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
+
+   if (!hWnd)
+   {
+      return FALSE;
+   }
+
+   ShowWindow(hWnd, nCmdShow);//这两句 显示窗体
+   UpdateWindow(hWnd);
+
+   return TRUE;
+}
+
+//
+//  FUNCTION: WndProc(HWND, unsigned, WORD, LONG)
+//
+//  PURPOSE:  Processes messages for the main window.
+//
+//  WM_COMMAND	- process the application menu
+//  WM_PAINT	- Paint the main window
+//  WM_DESTROY	- post a quit message and return
+//
+//  窗口消息处理函数，程序的功能是在这个程序里实现的，
+//  通过窗体类的注册过程，与我们的窗体榜定
+//  换一句话：窗口注册这个函数，窗口就能执行这个函数
+//
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	int wmId, wmEvent;
+	PAINTSTRUCT ps;
+	HDC hdc;
+	TCHAR szHello[MAX_LOADSTRING];
+	LoadString(hInst, IDS_HELLO, szHello, MAX_LOADSTRING);
+
+	switch (message) //判断消息、根据类别处理，是个大的switch语句
+	{
+		case WM_COMMAND://菜单消息
+			wmId    = LOWORD(wParam); 
+			wmEvent = HIWORD(wParam); 
+			// Parse the menu selections:
+			switch (wmId)
+			{
+				case IDM_ABOUT:
+				   DialogBox(hInst, (LPCTSTR)IDD_ABOUTBOX, hWnd, (DLGPROC)About);
+				   break;
+				case IDM_EXIT:
+				   DestroyWindow(hWnd);
+				   break;
+				default:
+				   return DefWindowProc(hWnd, message, wParam, lParam);
+			}
+			break;
+		case WM_PAINT: //窗体重绘消息，一般执行绘图操作
+			hdc = BeginPaint(hWnd, &ps);
+			// TODO: Add any drawing code here...
+			RECT rt;
+			GetClientRect(hWnd, &rt);
+			DrawText(hdc, szHello, strlen(szHello), &rt, DT_CENTER);
+			EndPaint(hWnd, &ps);
+			break;
+		case WM_DESTROY:
+			PostQuitMessage(0);
+			break;
+		default:
+			return DefWindowProc(hWnd, message, wParam, lParam);
+   }
+   return 0;
+}
+
+// Mesage handler for about box.  about对话框中的消息处理函数，结构同WndPro,只是简单了些
+LRESULT CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+		case WM_INITDIALOG:
+				return TRUE;
+
+		case WM_COMMAND:
+			if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL) 
+			{
+				EndDialog(hDlg, LOWORD(wParam));
+				return TRUE;
+			}
+			break;
+	}
+    return FALSE;
+}
+
+```
+
+|名称|内容|   
+|---|---   
+|#include<windows.h>|相当于<stdio.h>  
 
 **原理**  
 * *  
