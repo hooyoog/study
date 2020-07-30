@@ -436,7 +436,7 @@ LRESULT CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 |名称(竖着读)|过程|过程|过程|动作|过程|
 |---|---|---|---|---|---
 |消| |  | 有 → |自定义的处理函数来处理，例如About|
-|息|消息处理函数WndProc|捕获消息有无自定义处理函数| | | 继续循环|
+|息|消息处理函数WndProc|捕获消息有无自定义处理函数| | | 继续循环↩|
 |循| |  | 无 → |Windows默认处理|
 |环| |  |   ||
 
