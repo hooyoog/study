@@ -475,13 +475,18 @@ https://github.com/hooyoog/study/blob/master/GAME_PROGRAMING_MASTER/images/WinMa
 |环| |  |   ||
 
 ****     
+**循环语句1获得GetMessage()，2翻译TranslateMessage（），3用DispatchMessage（）发送消息到WndProc（）函数去处理**   
 **获得消息的两大函数**   
 |GetMessage()|PeekMessage()|   
 |---|---
 |阻塞（收到消息才返还）|非阻塞（没收到返回false）
 |重要功能是以阻塞的模式取出消息|主要功能是窥探，或者取出，需要第三个参数（PM_REMOVE）来取出  
 | |如果第三个参数（PM_NOREMOVE）,只偷看 
-|适合阻塞的业务 |非阻塞适合OpenGL在限制时间不断刷屏 
+|适合阻塞的业务 |非阻塞适合OpenGL在限制时间不断刷屏    
+
+   
+**翻译TranslateMessage（）** 
+**用DispatchMessage（）发送消息到WndProc（）函数去处理，所以main函数中不需要出现WndProc（），只要初始化时绑定了，消息就自己进入该函数，进入switch去轮询** 
 ****
 
 **关于WndProc函数**
