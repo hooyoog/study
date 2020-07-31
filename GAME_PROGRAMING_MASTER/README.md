@@ -429,10 +429,11 @@ LRESULT CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     return FALSE;
 }
 
-```
-
+```   
+   
 
 ##有点多，别怕。 上面有3个全局变量和5个全局函数    
+
 **三个全集变量**
 |名称|内容|   
 |---|---   
@@ -486,7 +487,7 @@ https://github.com/hooyoog/study/blob/master/GAME_PROGRAMING_MASTER/images/WinMa
 
    
 **翻译TranslateMessage（）** 
-**用DispatchMessage（）发送消息到WndProc（）函数去处理，所以main函数中不需要出现WndProc（），只要初始化时绑定了，消息就自己进入该函数，进入switch去轮询** 
+**用DispatchMessage()发送消息到WndProc()函数去处理，所以main函数中不需要出现WndProc()，只要初始化时MyRegisterClass绑定WndProc()了，消息就自己进入该函数，进入switch去轮询** 
 ****
 
 **关于WndProc函数**
