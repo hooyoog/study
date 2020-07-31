@@ -445,7 +445,7 @@ LRESULT CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 |名称|内容|
 |---|---
 |WinMain()|主函数
-|WndProc()|消息处理函数
+|WndProc()|消息处理函数，生成主窗口的函数
 |MyRegisterClass()|注册窗口类（其实直接把里面的内容写到main里面也成，但是这样封装成方法看上去执行流程更清晰）   
 |InitInstance()|产生并显示主窗体（main里使用）    
 |About()|他是在WndProc()消息处理函数中用到的,专门处理发给About对话框的消息   
@@ -459,7 +459,7 @@ https://github.com/hooyoog/study/blob/master/GAME_PROGRAMING_MASTER/images/WinMa
 |▼|  
 |主函数WinMain|  
 |▼|  
-|注册窗口类MyRegisterClass|  
+|注册窗口类MyRegisterClass,这个阶段要绑定消息处理器|  
 |▼|  
 |生成并显示窗体InitInstace|  
 |▼|  
@@ -498,23 +498,52 @@ WndProc函数是一个巨大的switch,功能越多约巨大，但是结构清晰
 |WM_COMMAND|菜单消息   
 |WM_PAINT|窗口重绘消息   
 |WM_DESTROY|窗体对象被销毁，Windows系统向窗体函数发送的消息    
-|其余|没有处理的消息由Windows进行默认处理   
+|其余|没有处理的消息由Windows进行默认处理      
 
- 
-**实践**
-| 名称 | 内容 |
-|---|---
-| 1.  | ```  ;```  
-| 2.  |  
-| 3.  | 查看 
-| 4.  | 查看 
-| 5.  | 查看 
-| 6.  | 查看 
-| 7.  | 查看 
+   
+   
+   
+## 5.Windows的API与MFC数据类型
+**通用**
+| 序号 | 名称 |内容
+|---|---|---
+| 1 | BOOL| 布尔，TRUE或者FALSE也是大写
+| 2 | BSTR| 32位字符指针
+| 3 | BYTE| 8位无符号字节，unsigned char
+| 4 | DWOERD| 32位无符号整数 
+| 5 | COLORREF|用于表示颜色的32位值，在GDI编程中常用到 
+| 6 | LONG|32位有符号整数 
+| 7 | LPARAM|32位的值，一般用于做函数的参数   
+| 8 | LPCSTR|指向常字符串的32位指针   
+| 9 | LPSTR|指向字符串的32位指针   
+| 10 | LPCTSTR|指向常字符串的32位指针 ，用于Unicode和DBCS两种编码   
+| 11 | LPTSTR|指向字符串的32位指针 ，用于Unicode和DBCS两种编码   
+| 12 | LPVQID|指向任意类型的32位指针   
+| 13 | LRESUKLT|Windows过程或回调函数返回的32位值
+| 14 | UNIT|在32位中是32位无符号整数
+| 15 | WNDPROC|一个32位的指向Windows函数的指针  
+| 16 | WORD|一个16位无符号整数  
+| 17 | WPARAM|在32位中，是32位值，通常作为函数参数  
 
+**仅用于MFC**
+| 序号 | 名称 |内容
+|---|---|---
+| 1 | POSITION| 用于标记集合中一个元素的位置的值，被MFC中的集合所使用
+| 2 | LPCRECT| 一个32位指针，指向一个常量RECT（矩阵）结构    
+
+**今后会遇到MFC中大量的宏，先记主要的，抓大放小**   
 
 ## 3.简单 
-
+**通用**
+| 序号 | 名称 |内容
+|---|---|---
+| 1 | ```  ;```  
+| 2 |  
+| 3 | 查看 
+| 4 | 查看 
+| 5 | 查看 
+| 6 | 查看 
+| 7 | 查看
 1. 创建工程 
 
 2. 理解他
