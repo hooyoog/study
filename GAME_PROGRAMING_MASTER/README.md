@@ -362,12 +362,16 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)//初始化
 //  窗口消息处理函数，程序的功能是在这个程序里实现的，
 //  通过窗体类的注册过程，与我们的窗体榜定
 //  换一句话：窗口注册这个函数，窗口就能执行这个函数
+//	LRESULT是32位返还值由windows过程调用函数返回,CALLBACK是指示该函数为回调函数
+//  参数1：依附窗体句柄
+//  参数2：消息的名字
+//  参数3-4：是消息的参数
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	int wmId, wmEvent;
-	PAINTSTRUCT ps;
-	HDC hdc;
+	PAINTSTRUCT ps; //用于屏幕绘制的结构
+	HDC hdc;//设备环境句柄，用于屏幕绘制
 	TCHAR szHello[MAX_LOADSTRING];
 	LoadString(hInst, IDS_HELLO, szHello, MAX_LOADSTRING);
 
@@ -377,30 +381,30 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			wmId    = LOWORD(wParam); 
 			wmEvent = HIWORD(wParam); 
 			// Parse the menu selections:
-			switch (wmId)
+			switch (wmId)//不同的菜单做出不同的处理
 			{
-				case IDM_ABOUT:
+				case IDM_ABOUT://弹出About对话框
 				   DialogBox(hInst, (LPCTSTR)IDD_ABOUTBOX, hWnd, (DLGPROC)About);
 				   break;
 				case IDM_EXIT:
 				   DestroyWindow(hWnd);
 				   break;
-				default:
+				default://默认菜单处理
 				   return DefWindowProc(hWnd, message, wParam, lParam);
 			}
 			break;
 		case WM_PAINT: //窗体重绘消息，一般执行绘图操作
-			hdc = BeginPaint(hWnd, &ps);
+			hdc = BeginPaint(hWnd, &ps);//开始绘制屏幕
 			// TODO: Add any drawing code here...
 			RECT rt;
-			GetClientRect(hWnd, &rt);
-			DrawText(hdc, szHello, strlen(szHello), &rt, DT_CENTER);
-			EndPaint(hWnd, &ps);
+			GetClientRect(hWnd, &rt);//获取屏幕客户区的大小
+			DrawText(hdc, szHello, strlen(szHello), &rt, DT_CENTER);//绘文本
+			EndPaint(hWnd, &ps);//结束绘图
 			break;
-		case WM_DESTROY:
-			PostQuitMessage(0);
+		case WM_DESTROY://销毁窗体
+			PostQuitMessage(0);//发送推出消息
 			break;
-		default:
+		default://Windows默认处理
 			return DefWindowProc(hWnd, message, wParam, lParam);
    }
    return 0;
@@ -475,11 +479,28 @@ https://github.com/hooyoog/study/blob/master/GAME_PROGRAMING_MASTER/images/WinMa
 |GetMessage()|PeekMessage()|   
 |---|---
 |阻塞（收到消息才返还）|非阻塞（没收到返回false）
-|重要功能是阻塞的取出|主要功能是窥探，或者取出，需要第三个参数（PM_REMOVE）  
+|重要功能是以阻塞的模式取出消息|主要功能是窥探，或者取出，需要第三个参数（PM_REMOVE）来取出  
 | |如果第三个参数（PM_NOREMOVE）,只偷看 
 |适合阻塞的业务 |非阻塞适合OpenGL在限制时间不断刷屏 
 ****
 
+**关于WndProc函数**
+
+在WinMain函数中，并没有直接调用WinProc，实在注册窗体时将他注册入了窗体类，    
+这就是让系统知道，有消息了，就自动调用此函数来处理     
+而后WinMain启动消息循环，当DispatchMessage函数发消息时，就给WndProc，让他处理     
+WndProc函数是一个巨大的switch,功能越多约巨大，但是结构清晰，里面有小的菜单项设定switch，   
+比MFC的消息映射易懂，但是巨大   
+
+**三个地方**   
+|名称|内容| 
+|---|---
+|WM_COMMAND|菜单消息   
+|WM_PAINT|窗口重绘消息   
+|WM_DESTROY|窗体对象被销毁，Windows系统向窗体函数发送的消息    
+|其余|没有处理的消息由Windows进行默认处理   
+
+ 
 **实践**
 | 名称 | 内容 |
 |---|---
